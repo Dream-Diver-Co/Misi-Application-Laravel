@@ -1,0 +1,773 @@
+:root {
+    --primary: #374259;
+}
+
+.page-item.active .page-link {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+    color: #fff !important;
+}
+
+.page-link {
+    color: var(--primary) !important;
+}
+
+.swal2-styled.swal2-confirm {
+    background-color: var(--primary) !important;
+}
+
+.btn-primary,
+.btn-group .btn {
+    background-color: var(--primary) !important;
+    border-color: var(--primary) !important;
+}
+
+.btn-primary:hover,
+.btn-group .btn:hover,
+.swal2-styled.swal2-confirm:hover {
+    background-color: #2c3446 !important;
+    border-color: #2c3446 !important;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+label:not(.form-check-label):not(.custom-file-label) {
+    font-weight: 500;
+    font-size: 0.8rem;
+}
+
+
+/* .content-wrapper>.content {
+    padding: 0;
+} */
+
+.container-fluid {
+    width: 100%;
+    padding-right: 0;
+    padding-left: 0;
+}
+
+td {
+    font-size: 0.8rem;
+}
+
+div.dt-buttons {
+    position: absolute !important;
+}
+
+.btn-group .btn {
+    border-radius: 0;
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+    padding-right: 2rem;
+}
+
+
+
+.nav-treeview>li.has-treeview>.nav-link {
+    padding-left: 1.8rem;
+}
+
+.nav-treeview>.nav-item>.nav-link {
+    padding-left: 2.5rem;
+}
+
+.nav-treeview>.nav-item>.nav-link:hover {
+    background-color: transparent !important;
+    color: #F79327;
+}
+
+[class*=sidebar-dark-] .nav-sidebar>.nav-item.menu-open>.nav-link,
+[class*=sidebar-dark-] .nav-sidebar>.nav-item:hover>.nav-link,
+[class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link:focus {
+    background-color: transparent !important;
+    color: #F79327;
+}
+
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active,
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:focus,
+[class*=sidebar-dark-] .nav-treeview>.nav-item>.nav-link.active:hover {
+    background-color: transparent !important;
+    color: #F79327;
+}
+
+[class*=sidebar-dark-] .nav-sidebar>.nav-item>.nav-link.active {
+    color: #F79327;
+    box-shadow: none;
+    background-color: transparent !important;
+}
+
+.sidebar-dark-primary .nav-sidebar>.nav-item>.nav-link.active,
+.sidebar-light-primary .nav-sidebar>.nav-item>.nav-link.active {
+    background-color: transparent !important;
+    color: #F79327;
+}
+
+.nav-item.menu-open {
+    background-color: transparent !important;
+}
+
+.nav-item.menu-open>.nav-link {
+    background-color: transparent !important;
+}
+
+.menu-is-opening>.nav-link {
+    background-color: transparent !important;
+}
+
+/* .nav-item {
+    text-transform: uppercase;
+} */
+
+
+.sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.top-button {
+    background-color: #eee;
+    border: none;
+    padding: 15px 20px;
+    color: #6b6a6a;
+    clip-path: polygon(85% 0%, 100% 50%, 85% 100%, 0% 100%, 15% 50%, 0% 0%);
+}
+
+.top-button:hover {
+    background-color: #ddd;
+}
+
+.top-button:before {
+    content: "";
+    background: white;
+    height: 100%;
+    position: absolute;
+    left: 0%;
+    top: 50%;
+    /* transform: translate(-50%, -50%); */
+    clip-path: polygon(85% 0%, 100% 50%, 85% 100%, 0% 100%, 15% 50%, 0% 0%);
+}
+
+
+.go-back {
+    clip-path: polygon(85% 0%, 100% 50%, 85% 100%, 0% 100%, 0% 50%, 0% 0%);
+}
+
+[class*=sidebar-dark-] {
+    /* background-color: #282C77; */
+    background-color: #374259;
+}
+
+.input-group-append {
+    cursor: pointer;
+}
+
+.pib-pit-table td,
+#pib-pit-table-form td {
+    font-size: 14px;
+}
+
+#patient-view-modal .modal-dialog {
+    width: 80%;
+}
+
+.note-btn.btn {
+    background-color: #eee !important;
+    border-color: #ddd !important;
+}
+
+.note-btn.btn:hover {
+    background-color: #ddd !important;
+    border-color: #ddd !important;
+}
+
+.air-datepicker {
+    z-index: 9999 !important;
+}
+
+/* Customize FullCalendar grid */
+.fc-header-toolbar {
+    background-color: #f8f8f8;
+    padding: 10px;
+}
+
+.fc-header-toolbar .fc-button {
+    margin-right: 5px;
+}
+
+.fc-scrollgrid {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.fc-daygrid-day {
+    font-weight: bold;
+}
+
+.fc-daygrid-event {
+    background-color: #1e90ff;
+    /* Customize the background color of events */
+    color: #fff;
+    /* Customize the text color of events */
+    border-radius: 5px;
+}
+
+.fc-daygrid-event:hover {
+    background-color: #2e90ff;
+    /* Customize the hover background color of events */
+}
+
+.fc-daygrid-event .fc-event-main {
+    padding: 5px;
+}
+
+.fc-daygrid-event .fc-event-main .fc-event-title {
+    font-size: 14px;
+}
+
+.fc-today {
+    background-color: #f2f2f2;
+    /* Customize the background color of today's date */
+}
+
+.fc-event {
+    background-color: #374259;
+    padding: 5px;
+    cursor: pointer;
+}
+
+
+
+
+
+/* image upload profile of patient */
+
+.image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#imageContainer {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #acacac;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+#existingImage {
+    width: 100%;
+    /* Make the image occupy 100% of the container's width */
+    height: 100%;
+    /* Make the image occupy 100% of the container's height */
+    object-fit: cover;
+    /* Maintain aspect ratio and cover the container */
+    border-radius: 50%;
+    /* Add border-radius to make the image circular */
+}
+
+#fileInput {
+    display: none;
+    /* Hide the file input */
+}
+
+#uploadButton {
+    padding: 2px 6px;
+    background-color: #F79327;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+#removeImage {
+    display: none;
+    margin-top: 10px;
+    padding: 2px 6px;
+    background-color: #d75656;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+
+
+/* Hide the file input */
+#image-upload-input {
+    display: none;
+}
+
+/* Style for the edit button */
+#edit-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 2px 6px;
+    cursor: pointer;
+}
+
+/* Wrap the image in a div with a fixed width */
+#image-container {
+    /* width: 300px; */
+    overflow: hidden;
+}
+
+/* Style for the image */
+#image-preview {
+    max-width: 100%;
+    /* Ensure the image doesn't exceed the container width */
+}
+
+.image-container button {
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+
+
+
+/* section */
+/* multiple files */
+
+.file-list-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.file-icon {
+    margin-right: 10px;
+    font-size: 24px;
+}
+
+.remove-button {
+    cursor: pointer;
+    font-size: 15px;
+    color: red;
+}
+
+/* Custom CSS classes for file types */
+.pdf-icon {
+    color: #FF5733;
+    /* Set the color for PDF files */
+}
+
+.doc-icon {
+    color: #3498DB;
+    /* Set the color for DOC files */
+}
+
+.xls-icon {
+    color: #2ECC71;
+    /* Set the color for XLS files */
+}
+
+
+/*  */
+/* */
+/* css for ticket attachment */
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.thumbnail-container {
+    display: flex;
+    flex-direction: row;
+    /* Thumbnails displayed from left to right */
+    flex-wrap: wrap;
+    /* Prevent wrapping of thumbnails */
+    /* overflow-x: auto; */
+    /* Enable horizontal scrolling if thumbnails overflow */
+    /* Adjust these properties to control the spacing between thumbnails */
+    gap: 10px;
+    /* Spacing between thumbnails */
+    margin-left: -10px;
+    /* Offset the first thumbnail's margin */
+
+}
+
+.thumbnail-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* margin-bottom: 15px; */
+}
+
+.thumbnail {
+    width: 100px;
+    height: 100px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    /* Add border radius */
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    /* Add box shadow */
+    overflow: hidden;
+    /* Hide overflow content if thumbnails are larger */
+    position: relative;
+    /* Position for the remove button */
+}
+
+.thumbnail img,
+.thumbnail canvas {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Ensure the image or PDF fills the container */
+}
+
+.remove-button {
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 2px 6px;
+    cursor: pointer;
+    margin-top: 5px;
+}
+
+.file-input {
+    display: none;
+    /* Hide the file input by default */
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.additional-div {
+    /* Add styles for the additional div here */
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    text-align: center;
+}
+
+
+#showFileInput i {
+    font-size: 25px;
+}
+
+.delete_product {
+    margin-bottom: 15px;
+}
+
+.work_note {
+    margin-left: 40px !important;
+}
+
+.activity_log_title {
+    margin-left: 30px;
+}
+
+.content-container {
+    margin-top: 10px;
+}
+
+
+.thumbnail-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* overflow-x: auto; */
+    gap: 10px;
+    margin-left: 7px;
+    margin-bottom: 20px;
+    margin-top: 15px;
+}
+
+.thumbnail {
+    width: 100%;
+    height: 25px;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: left;
+    padding: 0px 5px;
+    margin-left: 15px;
+}
+
+.thumbnail span {
+    margin-left: 10px;
+    font-size: 14px;
+    word-wrap: break-word;
+}
+
+.thumbnail .remove-icon {
+    /* cursor: pointer;
+    font-size: 18px; */
+    /* margin-left: auto; */
+    color: orange;
+}
+
+.thumbnail-wrapper .thumbnail a {
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+
+
+
+
+
+/* Add styles for role list page*/
+
+.columns {
+    display: flex;
+}
+
+.column {
+    flex: 1;
+    margin: 10px;
+    border: 2px solid #c1c1c1;
+    /* Add a green border to each column */
+    padding: 10px;
+    /* Optional: Add padding for spacing */
+}
+
+/* .permission-container {
+    height: 600px;
+    overflow: scroll;
+} */
+
+.content-wraper {
+    margin: 10px 20px;
+}
+
+
+
+
+
+
+/* Add styles dashboard top search bar*/
+
+.navbar-search-block .input-group {
+    width: 83%;
+    margin-left: 60px;
+}
+
+
+/* login page logo*/
+
+.login-logo img {
+    width: 150px;
+    height: 150px;
+}
+
+
+/* ticket from reffarel*/
+
+.input-container {
+    /* border: 1px dashed rgb(116, 116, 116); */
+    padding: 60px;
+    border-radius: 5px;
+    background: #ffffff;
+    margin-top: 100px;
+    box-shadow: 0px 1px 3px #aaa;
+}
+
+.input-container button {
+    margin-top: 25px;
+    width: 85px;
+}
+
+.pdf-input-field label {
+    font-size: 22px !important;
+    text-transform: capitalize;
+    font-weight: 600 !important;
+    margin-bottom: 23px;
+    display: block;
+    text-align: center;
+}
+
+#formFile::file-selector-button {
+    width: 83px;
+    border-radius: 0px;
+    border: none;
+    /* margin: 0; */
+    padding: 0;
+    height: 30px;
+    cursor: pointer;
+    color: #fff;
+    background-color: #2C3446;
+    opacity: 0.85;
+    font-size: 15px;
+    margin-right: 18px;
+}
+
+#formFile {
+    /* border: none; */
+    padding-top: 0;
+    padding-left: 0;
+    padding-bottom: 0;
+    border-radius: 0px !important;
+    /* margin: 0; */
+    height: 100%;
+    font-size: 15px;
+}
+
+
+/* ticket edit page histry activiti*/
+
+.ticket_history_title {
+    margin-left: 37px;
+}
+
+.ticket_history_card {
+    margin-left: 210px;
+    /* padding: 50px; */
+}
+
+
+
+
+
+
+
+.input-container button {
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+/* login page design*/
+
+
+.card {
+    box-shadow: none;
+    margin-bottom: 1rem;
+}
+
+
+.login-box,
+.register-box {
+    width: 360px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+}
+
+.login-logo,
+.register-logo {
+    margin-bottom: 0rem;
+}
+
+.card-primary.card-outline {
+    border-top: none;
+}
+
+.card h3 {
+    display: none;
+}
+
+.card-header {
+    border-bottom: none;
+}
+
+.login-box,
+.register-box {
+    width: 400px;
+    background-color: #fff;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    box-shadow: 0 0 1px rgba(0, 0, 0, .125), 0 1px 3px rgba(0, 0, 0, .2);
+}
+
+
+.card-footer {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.card-footer p a {
+
+    color: #555555;
+}
+
+.card-footer p a:hover {
+
+    color: #374259;
+}
+
+
+.login-card-body,
+.register-card-body {
+    padding: 20px 20px 50px 20px;
+}
+
+
+.content-wrapper>.content {
+    padding: 0 0;
+}
+
+.content-wrapper .row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: 0px;
+    margin-left: 0px;
+    padding: 0 15px !important;
+}
+
+.row h6.ml-3.text-right {
+    margin-left: 40px !important;
+    font-size: 20px !important;
+}
+
+.thumbnail .fas {
+    font-size: 14px;
+}
+
+
+.mail-button {
+    font-size: 25px;
+}
+
+
+
+.login-page,
+.register-page {
+    background-image: url("/images/login_bg.jpeg");
+    /* height: 100%; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+
+.go-to-appointment a {
+    color: #6b6a6a;
+}
