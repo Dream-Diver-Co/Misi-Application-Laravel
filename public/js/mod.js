@@ -169,7 +169,13 @@ function fetchFormInfo(ticketId, formType) {
             dataFetched = true;
 
             if (dataFetched) {
-                openModal();
+
+                if(formType == 1){
+                    openModalpib();
+                }else if(formType == 2 ){
+                    openModalpit();
+                }
+
             }
 
             // let form = $("#pib-pit-table-form");
@@ -183,9 +189,14 @@ function fetchFormInfo(ticketId, formType) {
 }
 
 
-function openModal() {
+function openModalpib() {
     // Open the modal here
     $("#pib-form-modal").modal("show");
+}
+
+function openModalpit() {
+    // Open the modal here
+    $("#pit-form-modal").modal("show");
 }
 
 
@@ -239,6 +250,13 @@ $("#pib-pit-print").click(function () {
 // }
 
 $(".pib-form-open").click(function () {
+    let ticketId = $(this).data("ticket-id");
+    let formType = $(this).data("form-type");
+
+    fetchFormInfo(ticketId, formType);
+});
+
+$(".pit-form-open").click(function () {
     let ticketId = $(this).data("ticket-id");
     let formType = $(this).data("form-type");
 

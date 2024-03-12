@@ -14,13 +14,13 @@ use Spatie\Permission\Models\Role;
 use App\Models\Attachment;
 use PragmaRX\Countries\Package\Countries;
 
-class PitController extends Controller
+class YesApprovalController extends Controller
 {
-
     public function __construct()
     {
-        $this->middleware(['role:pit|admin']);
+        $this->middleware(['role:yesapproval|admin']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +28,7 @@ class PitController extends Controller
      */
     public function index()
     {
-        $pitId = Role::where('name', 'pit')->first()->id;
+        $pitId = Role::where('name', 'yes approval')->first()->id;
         $tickets = Ticket::where('department_id', $pitId)->get();
         $heads = [
             ['label' => 'Actions', 'no-export' => true, 'width' => 5],
@@ -77,13 +77,12 @@ class PitController extends Controller
 
             array_push($items, '<nobr>
                     </a>
-                    <a class="btn btn-xs btn-default text-teal mx-1 shadow" href="' . route('pit.show', ['pit' => $ticket->id]) . '">
+
+
+                    <a class="btn btn-xs btn-default text-teal mx-1 shadow" href="' . route('yes-approvals.show', ['yes_approval' => $ticket->id]) . '">
                         <i class="fa fa-lg fa-fw fa-eye"></i>
-                    </a><button class="btn btn-xs btn-default text-grey mx-1 shadow pit-form-open" data-toggle="tooltip" data-placement="top" title="Open PiT form" data-ticket-id="' . $ticket->id . '" data-form-type="' . 2 . '">
-                    <i class="fas fa-laptop-medical"></i>
-                </button></nobr>', '</a><a class="text-info mx-1" href="' . route('pit.show', ['pit' => $ticket->id]) . '">
-                    ' . $ticket->id . '</a>', $assigned, $ticket->patient()->first()->id, $ticket->department_id != null ?  ucfirst(Role::where('id', $ticket->department_id)->first()->name) : '', ucfirst($ticket->status), $ticket->call_strike, $ticket->remarks, Carbon::parse($ticket->created_at)->format('d F, Y'), Carbon::parse($ticket->updated_at)->format('d F, Y'), $ticket->mono_multi_zd, $ticket->mono_multi_screening, $ticket->intake_or_therapist, $ticket->tresonit_number, $ticket->datum_intake, $ticket->datum_intake_2, $ticket->nd_account, $ticket->avc_alfmvm_sbg, $ticket->honos, $ticket->berha_intake, $ticket->rom_start, $ticket->rom_end, $ticket->berha_end, $ticket->vtcb_date, $ticket->closure, $ticket->aanm_intake_1, $ticket->location,
-                );
+                    </a></nobr>', '</a><a class="text-info mx-1" href="' . route('yes-approvals.show', ['yes_approval' => $ticket->id]) . '">
+                    ' . $ticket->id . '</a>', $assigned, $ticket->patient()->first()->id, $ticket->department_id != null ?  ucfirst(Role::where('id', $ticket->department_id)->first()->name) : '', ucfirst($ticket->status), $ticket->call_strike, $ticket->remarks, Carbon::parse($ticket->created_at)->format('d F, Y'), Carbon::parse($ticket->updated_at)->format('d F, Y'), $ticket->mono_multi_zd, $ticket->mono_multi_screening, $ticket->intake_or_therapist, $ticket->tresonit_number, $ticket->datum_intake, $ticket->datum_intake_2, $ticket->nd_account, $ticket->avc_alfmvm_sbg, $ticket->honos, $ticket->berha_intake, $ticket->rom_start, $ticket->rom_end, $ticket->berha_end, $ticket->vtcb_date, $ticket->closure, $ticket->aanm_intake_1, $ticket->location);
             array_push($data, $items);
         }
 
@@ -93,7 +92,7 @@ class PitController extends Controller
 
         ];
 
-        return view('pit.index', compact('heads', 'config'));
+        return view('yesapproval.index', compact('heads', 'config'));
     }
 
     /**
@@ -133,17 +132,12 @@ class PitController extends Controller
         $ticketId = $id;
         $ticket = Ticket::where('id', $id)->first();
         $patient = $ticket->patient()->first();
-
-        // dd($patient->user()->first());
-
         $emailTemplates = EmailTemplate::all();
         $mailTypes = $emailTemplates->pluck('mail_type')->unique()->toArray();
-
         $attachments = $ticket->attachments;
 
         $countries = Countries::all();
-
-        return view('pit.show', compact('patients', 'matchingRoles', 'ticketId', 'therapists', 'ticket', 'patient', 'mailTypes', 'attachments', 'countries'));
+        return view('yesapproval.show', compact('patients', 'matchingRoles', 'ticketId', 'therapists', 'ticket', 'patient', 'mailTypes', 'attachments', 'countries'));
     }
 
     /**
@@ -244,6 +238,7 @@ class PitController extends Controller
             $ticket->language = $data['language-treatment'];
             // $ticket->files = $data[''];
 
+            // $ticket->save();
             $ticket->save();
             if ($data['comments'] != null) {
                 $history = new TicketHistory();
@@ -253,8 +248,6 @@ class PitController extends Controller
 
                 $history->save();
             }
-
-            // $ticket->save();
 
             //attachment update
 
