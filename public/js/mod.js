@@ -260,6 +260,8 @@ $(".pit-form-open").click(function () {
     let ticketId = $(this).data("ticket-id");
     let formType = $(this).data("form-type");
 
+    //console.log(ticketId);
+
     fetchFormInfo(ticketId, formType);
 });
 

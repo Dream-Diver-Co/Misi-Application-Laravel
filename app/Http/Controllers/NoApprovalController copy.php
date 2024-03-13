@@ -82,13 +82,7 @@ class NoApprovalController extends Controller
 
                     <a class="btn btn-xs btn-default text-teal mx-1 shadow" href="' . route('no-approvals.show', ['no_approval' => $ticket->id]) . '">
                         <i class="fa fa-lg fa-fw fa-eye"></i>
-                    </a>
-
-                    <button class="btn btn-xs btn-default text-grey mx-1 shadow pit-form-open" data-toggle="tooltip" data-placement="top" title="Open PiT form" data-ticket-id="' . $ticket->id . '" data-form-type="' . 2 . '">
-                        <i class="fas fa-laptop-medical"></i>
-                    </button>
-
-                    </nobr>', '</a><a class="text-info mx-1" href="' . route('no-approvals.show', ['no_approval' => $ticket->id]) . '">
+                    </a></nobr>', '</a><a class="text-info mx-1" href="' . route('no-approvals.show', ['no_approval' => $ticket->id]) . '">
                     ' . $ticket->id . '</a>', $assigned, $ticket->patient()->first()->id, $ticket->department_id != null ?  ucfirst(Role::where('id', $ticket->department_id)->first()->name) : '', ucfirst($ticket->status), $ticket->call_strike, $ticket->remarks, Carbon::parse($ticket->created_at)->format('d F, Y'), Carbon::parse($ticket->updated_at)->format('d F, Y'), $ticket->mono_multi_zd, $ticket->mono_multi_screening, $ticket->intake_or_therapist, $ticket->tresonit_number, $ticket->datum_intake, $ticket->datum_intake_2, $ticket->nd_account, $ticket->avc_alfmvm_sbg, $ticket->honos, $ticket->berha_intake, $ticket->rom_start, $ticket->rom_end, $ticket->berha_end, $ticket->vtcb_date, $ticket->closure, $ticket->aanm_intake_1, $ticket->location,);
             array_push($data, $items);
         }
