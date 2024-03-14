@@ -84,6 +84,10 @@ class NoApprovalController extends Controller
                         <i class="fa fa-lg fa-fw fa-eye"></i>
                     </a>
 
+                    <button class="btn btn-xs btn-default text-grey mx-1 shadow pib-form-open" data-toggle="tooltip" data-placement="top" title="Open PiT form" data-ticket-id="' . $ticket->id . '" data-form-type="' . 1 . '">
+                    <i class="fa fa-lg fa-fw fa-pager"></i>
+                    </button>
+
                     <button class="btn btn-xs btn-default text-grey mx-1 shadow pit-form-open" data-toggle="tooltip" data-placement="top" title="Open PiT form" data-ticket-id="' . $ticket->id . '" data-form-type="' . 2 . '">
                         <i class="fas fa-laptop-medical"></i>
                     </button>

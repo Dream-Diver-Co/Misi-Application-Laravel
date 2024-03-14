@@ -20,12 +20,12 @@
                         class="fas fa-fw fa-solid fa-envelope"></i>
                 </button>
 
-                <button class="btn btn-xs btn-default text-grey mx-1 shadow pib-form-open" data-toggle="tooltip" data-placement="top" title="Open PiB form" data-ticket-id="{{$ticket->id}}" data-form-type="1">
+                <button class="top-button Q-button-icon btn btn-xs btn-default text-grey mx-1 shadow pib-form-open" data-toggle="tooltip" data-placement="top" title="Open PiB form" data-ticket-id="{{$ticket->id}}" data-form-type="1">
                     <i class="fa fa-lg fa-fw fa-pager"></i>
                 </button>
 
 
-                <button class="btn btn-xs btn-default text-grey mx-1 shadow pit-form-open" data-toggle="tooltip" data-placement="top" title="Open PiT form" data-ticket-id="{{$ticket->id}}" data-form-type="2">
+                <button class=" top-button Q-button-icon btn btn-xs btn-default text-grey mx-1 shadow pit-form-open" data-toggle="tooltip" data-placement="top" title="Open PiT form" data-ticket-id="{{$ticket->id}}" data-form-type="2">
                     <i class="fas fa-laptop-medical"></i>
                 </button>
 
@@ -134,7 +134,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-primary" id="pib-pit-print">Print</button>
+                        <button type="button" class="btn btn-sm btn-primary" id="pib-print">Print</button>
                     </div>
                 </div>
             </div>
@@ -226,7 +226,7 @@
 
                             </table>
 
-                            <form id="pib-pit-table-form" method="GET" action="{{ route('update-answer') }}">
+                            <form id="pit2-table-form" method="GET" action="{{ route('update-answer') }}">
                                 @csrf
 
                             </form>
@@ -234,9 +234,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        {{-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> --}}
-                        <button type="button" class="btn btn-sm btn-primary" id="pib-pit-print">Print</button>
-                        {{-- <button type="button" class="btn btn-sm btn-primary" id="pib-pit-submit">Save changes</button> --}}
+                        <button type="button" class="btn btn-sm btn-primary" id="pit-print">Print</button>
                     </div>
                 </div>
             </div>
