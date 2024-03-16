@@ -82,7 +82,13 @@ class WorkSchedule extends Controller
      */
     public function create()
     {
-        //
+        // $screener = Role::where('name', 'screener')->first();
+        // $patients = Patient::all();
+        //return view('tickets.create', compact(['screener', 'patients']));
+
+        $therapists = Therapist::all();
+
+        return view('schedule.work.create', compact(['therapists']));
     }
 
     /**

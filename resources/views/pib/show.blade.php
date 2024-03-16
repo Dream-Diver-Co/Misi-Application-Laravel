@@ -110,9 +110,13 @@
                                             $therapistId = $therapist->id;
                                             $suggested_array = json_decode($ticket->suggested_therapists) ?? [];
                                             $isSelected = in_array($therapistId, $suggested_array);
+
+                                            $therapist_work_time = \App\Models\WorkDayTime::where('therapist_id', $therapistId )->first();
                                         @endphp
                                         <option value="{{ $therapist->id }}" {{ $isSelected ? 'selected' : '' }}>
                                             {{ $therapist->user()->first()->name ? $therapist->user()->first()->name : $therapist->user()->first()->id }}
+
+                                            ({{$therapist_work_time->start_time ?? ''}} : {{$therapist_work_time->end_time ?? ''}})
                                         </option>
                                     @endforeach
                                 </select>
