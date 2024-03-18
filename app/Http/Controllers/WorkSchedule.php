@@ -57,6 +57,8 @@ class WorkSchedule extends Controller
 
             $dayNamesString = implode(', ', $holidayNames);
 
+
+
             $startTime = Carbon::createFromFormat('H:i:s', $worktime->start_time)->format('h:i A');
             $endTime = Carbon::createFromFormat('H:i:s', $worktime->end_time)->format('h:i A');
             array_push($items, '<nobr>

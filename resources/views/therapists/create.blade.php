@@ -209,49 +209,7 @@
                                     id="remarks" name="remarks"></div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="startTime" class="col-5 text-right">Start Time:</label>
-                            <div class="col-7">
-                                {{-- <input type="time" name="start-time" id="start-time" class="form-control form-control-sm timepicker" placeholder="Choose a time..." value="09:00:00"> --}}
 
-                                <div class="input-group date" id="startTime" data-target-input="nearest">
-                                    <input type="text"
-                                        class="form-control form-control-sm datetimepicker-input"
-                                        data-target="#startTime" id="startTimeInput" name="start-time" />
-                                    <div class="input-group-append" data-target="#startTime"
-                                        data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-clock"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-
-
-                        <div class="form-group row">
-                            <label for="endTime" class="col-5 text-right">End Time:</label>
-                            <div class="col-7">
-                                {{-- <input type="time" name="start-time" id="start-time" class="form-control form-control-sm timepicker" placeholder="Choose a time..." value="09:00:00"> --}}
-
-                                <div class="input-group date" id="endTime" data-target-input="nearest">
-                                    <input type="text"
-                                        class="form-control form-control-sm datetimepicker-input"
-                                        data-target="#endTime" id="endTimeInput" name="end-time" />
-                                    <div class="input-group-append" data-target="#endTime"
-                                        data-toggle="datetimepicker">
-                                        <div class="input-group-text"><i class="fa fa-clock"></i></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="weekoff" class="col-5 text-right">Weekly Off:</label>
-                            <select name="weeklyoff[]" id="weekoff"
-                                class="form-control from-control-sm col-7 selectpicker" multiple>
-
-                            </select>
-                        </div>
 
 
 

@@ -19,6 +19,15 @@
                 <button class="top-button mail-button" data-toggle="modal" data-target="#mailModal"><i
                         class="fas fa-fw fa-solid fa-envelope"></i>
                 </button>
+                <button class="top-button Q-button-icon btn btn-xs btn-default text-grey mx-1 shadow pib-form-open" data-toggle="tooltip" data-placement="top" title="Open PiB form" data-ticket-id="{{$ticket->id}}" data-form-type="1">
+                    <i class="fa fa-lg fa-fw fa-pager"></i>
+                </button>
+
+
+                <button class=" top-button Q-button-icon btn btn-xs btn-default text-grey mx-1 shadow pit-form-open" data-toggle="tooltip" data-placement="top" title="Open PiT form" data-ticket-id="{{$ticket->id}}" data-form-type="2">
+                    <i class="fas fa-laptop-medical"></i>
+                </button>
+
                 <button class="top-button go-to-appointment">
                     <a href="{{ route('ticket-appointments.create') }}" target="_blank"> Appointment</a>
                 </button>
@@ -139,6 +148,7 @@
                                         @php
 
                                             $therapistId = $therapist;
+
                                             $matchingRows = \App\Models\TicketAppointment::where('assigned_therapists', $therapistId)->pluck('id');
                                             $startDate = \Carbon\Carbon::now();
                                             $endDate = $startDate->copy()->addDays(14);
@@ -479,6 +489,8 @@
     @include('extras.patient_modal')
     @include('extras.cancelModal')
     @include('extras.mailModal')
+    @include('extras.pib_modal')
+    @include('extras.pit_modal')
 @stop
 
 @section('js')

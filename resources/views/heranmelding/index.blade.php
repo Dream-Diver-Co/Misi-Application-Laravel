@@ -17,6 +17,8 @@
             </x-adminlte-datatable>
         </div>
     </div>
+    @include('extras.pib_modal')
+    @include('extras.pit_modal')
 @stop
 
 @section('css')

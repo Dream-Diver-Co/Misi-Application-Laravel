@@ -17,6 +17,10 @@
                 <button class="top-button mail-button" data-toggle="modal" data-target="#mailModal"><i
                         class="fas fa-fw fa-solid fa-envelope"></i>
                 </button>
+                {{-- <button class="top-button Q-button-icon btn btn-xs btn-default text-grey mx-1 shadow pib-form-open" data-toggle="tooltip" data-placement="top" title="Open PiB form" data-ticket-id="{{$ticket->id}}" data-form-type="1">
+                    <i class="fa fa-lg fa-fw fa-pager"></i>
+                </button> --}}
+
 
 
             </div>
@@ -112,11 +116,24 @@
                                             $isSelected = in_array($therapistId, $suggested_array);
 
                                             $therapist_work_time = \App\Models\WorkDayTime::where('therapist_id', $therapistId )->first();
+
+                                            $matchingRows = \App\Models\TicketAppointment::where('assigned_therapists', $therapistId)->pluck('id');
+                                            $startDate = \Carbon\Carbon::now();
+                                            $endDate = $startDate->copy()->addDays(14);
+                                            $totalIntake = \Illuminate\Support\Facades\DB::table('intakes')
+                                                ->whereIn('appointment_id', $matchingRows)
+                                                ->whereBetween('date', [$startDate->toDateString(), $endDate->toDateString()])
+                                                ->count();
+
+
                                         @endphp
                                         <option value="{{ $therapist->id }}" {{ $isSelected ? 'selected' : '' }}>
                                             {{ $therapist->user()->first()->name ? $therapist->user()->first()->name : $therapist->user()->first()->id }}
 
-                                            ({{$therapist_work_time->start_time ?? ''}} : {{$therapist_work_time->end_time ?? ''}})
+                                            <span class="blue-text">
+                                                ({{ $totalIntake }})
+                                            </span>
+                                            ({{$therapist_work_time->start_time ?? '11:00:00'}} : {{$therapist_work_time->end_time ?? '17:00:00'}})
                                         </option>
                                     @endforeach
                                 </select>
@@ -437,6 +454,7 @@
     </div>
     @include('extras.patient_modal')
     @include('extras.mailModal')
+    {{-- @include('extras.pib_modal') --}}
 @stop
 
 @section('js')
