@@ -540,15 +540,7 @@
 
 
 
-                            <li class="nav-item">
-                                <a class="nav-link {{ Request::is('work-schedules/create') ? 'active' : '' }}"
-                                    href="{{ url('work-schedules/create') }}">
-                                    <i class="fas fa-fw fa-long-arrow-alt-right "></i>
-                                    <p>
-                                        Add Work Schedule
-                                    </p>
-                                </a>
-                            </li>
+
 
                             <li class="nav-item">
                                 <a class="nav-link {{ Request::is('work-schedules') ? 'active' : '' }} "

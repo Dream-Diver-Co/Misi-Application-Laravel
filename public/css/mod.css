@@ -776,3 +776,8 @@ div.dataTables_wrapper div.dataTables_filter {
 .Q-button-icon{
     font-size: 20px;
 }
+
+
+.blue-text {
+    color: blue;
+}

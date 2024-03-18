@@ -148,6 +148,7 @@
                                         @php
 
                                             $therapistId = $therapist;
+
                                             $matchingRows = \App\Models\TicketAppointment::where('assigned_therapists', $therapistId)->pluck('id');
                                             $startDate = \Carbon\Carbon::now();
                                             $endDate = $startDate->copy()->addDays(14);

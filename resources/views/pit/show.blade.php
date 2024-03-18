@@ -121,10 +121,19 @@
                                             $isSelected = in_array($therapistId, $suggested_array);
 
                                             $therapist_work_time = \App\Models\WorkDayTime::where('therapist_id', $therapistId )->first();
+
+                                            $matchingRows = \App\Models\TicketAppointment::where('assigned_therapists', $therapistId)->pluck('id');
+                                            $startDate = \Carbon\Carbon::now();
+                                            $endDate = $startDate->copy()->addDays(14);
+                                            $totalIntake = \Illuminate\Support\Facades\DB::table('intakes')
+                                                ->whereIn('appointment_id', $matchingRows)
+                                                ->whereBetween('date', [$startDate->toDateString(), $endDate->toDateString()])
+                                                ->count();
                                         @endphp
                                         <option value="{{ $therapist->id }}" {{ $isSelected ? 'selected' : '' }}>
                                             {{ $therapist->user()->first()->name ? $therapist->user()->first()->name : $therapist->user()->first()->id }}
-                                            ({{$therapist_work_time->start_time ?? ''}} : {{$therapist_work_time->end_time ?? ''}})
+                                            ({{ $totalIntake }})
+                                            ({{$therapist_work_time->start_time ?? '11:00:00'}} : {{$therapist_work_time->end_time ?? '17:00:00'}})
                                         </option>
                                     @endforeach
                                 </select>
