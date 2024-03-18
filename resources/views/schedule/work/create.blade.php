@@ -6,7 +6,7 @@
         <div>
             <div class="d-flex flex-direction-row button-container">
                 <button class="top-button go-back" id="goback">Go Back</button>
-                <button class="top-button top-submit-button" id="top-submit-button">Submit form</button>
+                <button class="top-button top-submit-button" id="top-submit-button">Submit</button>
 
 
             </div>
