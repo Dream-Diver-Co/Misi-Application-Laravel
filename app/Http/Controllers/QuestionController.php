@@ -177,7 +177,6 @@ class QuestionController extends Controller
 
         if ($formExists) {
 
-
             $formId = Form::where('ticket_id', $ticketId)->where('form_type', $formType)->first()->id;
             return $this->createAnswers($questions, $formId);
         } else {

@@ -14,13 +14,13 @@ use Spatie\Permission\Models\Role;
 use App\Models\Attachment;
 use PragmaRX\Countries\Package\Countries;
 
-class NoApprovalController extends Controller
+class YesApprovalController extends Controller
 {
-
     public function __construct()
     {
-        $this->middleware(['role:noapproval|admin']);
+        $this->middleware(['role:yesapproval|admin']);
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -28,7 +28,7 @@ class NoApprovalController extends Controller
      */
     public function index()
     {
-        $pitId = Role::where('name', 'no approval')->first()->id;
+        $pitId = Role::where('name', 'yes approval')->first()->id;
         $tickets = Ticket::where('department_id', $pitId)->get();
         $heads = [
             ['label' => 'Actions', 'no-export' => true, 'width' => 5],
@@ -79,21 +79,10 @@ class NoApprovalController extends Controller
                     </a>
 
 
-
-                    <a class="btn btn-xs btn-default text-teal mx-1 shadow" href="' . route('no-approvals.show', ['no_approval' => $ticket->id]) . '">
+                    <a class="btn btn-xs btn-default text-teal mx-1 shadow" href="' . route('yes-approvals.show', ['yes_approval' => $ticket->id]) . '">
                         <i class="fa fa-lg fa-fw fa-eye"></i>
-                    </a>
-
-                    <button class="btn btn-xs btn-default text-grey mx-1 shadow pib-form-open" data-toggle="tooltip" data-placement="top" title="Open PiT form" data-ticket-id="' . $ticket->id . '" data-form-type="' . 1 . '">
-                    <i class="fa fa-lg fa-fw fa-pager"></i>
-                    </button>
-
-                    <button class="btn btn-xs btn-default text-grey mx-1 shadow pit-form-open" data-toggle="tooltip" data-placement="top" title="Open PiT form" data-ticket-id="' . $ticket->id . '" data-form-type="' . 2 . '">
-                        <i class="fas fa-laptop-medical"></i>
-                    </button>
-
-                    </nobr>', '</a><a class="text-info mx-1" href="' . route('no-approvals.show', ['no_approval' => $ticket->id]) . '">
-                    ' . $ticket->id . '</a>', $assigned, $ticket->patient()->first()->id, $ticket->department_id != null ?  ucfirst(Role::where('id', $ticket->department_id)->first()->name) : '', ucfirst($ticket->status), $ticket->call_strike, $ticket->remarks, Carbon::parse($ticket->created_at)->format('d F, Y'), Carbon::parse($ticket->updated_at)->format('d F, Y'), $ticket->mono_multi_zd, $ticket->mono_multi_screening, $ticket->intake_or_therapist, $ticket->tresonit_number, $ticket->datum_intake, $ticket->datum_intake_2, $ticket->nd_account, $ticket->avc_alfmvm_sbg, $ticket->honos, $ticket->berha_intake, $ticket->rom_start, $ticket->rom_end, $ticket->berha_end, $ticket->vtcb_date, $ticket->closure, $ticket->aanm_intake_1, $ticket->location,);
+                    </a></nobr>', '</a><a class="text-info mx-1" href="' . route('yes-approvals.show', ['yes_approval' => $ticket->id]) . '">
+                    ' . $ticket->id . '</a>', $assigned, $ticket->patient()->first()->id, $ticket->department_id != null ?  ucfirst(Role::where('id', $ticket->department_id)->first()->name) : '', ucfirst($ticket->status), $ticket->call_strike, $ticket->remarks, Carbon::parse($ticket->created_at)->format('d F, Y'), Carbon::parse($ticket->updated_at)->format('d F, Y'), $ticket->mono_multi_zd, $ticket->mono_multi_screening, $ticket->intake_or_therapist, $ticket->tresonit_number, $ticket->datum_intake, $ticket->datum_intake_2, $ticket->nd_account, $ticket->avc_alfmvm_sbg, $ticket->honos, $ticket->berha_intake, $ticket->rom_start, $ticket->rom_end, $ticket->berha_end, $ticket->vtcb_date, $ticket->closure, $ticket->aanm_intake_1, $ticket->location);
             array_push($data, $items);
         }
 
@@ -103,7 +92,7 @@ class NoApprovalController extends Controller
 
         ];
 
-        return view('noapproval.index', compact('heads', 'config'));
+        return view('yesapproval.index', compact('heads', 'config'));
     }
 
     /**
@@ -145,11 +134,10 @@ class NoApprovalController extends Controller
         $patient = $ticket->patient()->first();
         $emailTemplates = EmailTemplate::all();
         $mailTypes = $emailTemplates->pluck('mail_type')->unique()->toArray();
-
         $attachments = $ticket->attachments;
-        $countries = Countries::all();
 
-        return view('noapproval.show', compact('patients', 'matchingRoles', 'ticketId', 'therapists', 'ticket', 'patient', 'mailTypes', 'attachments', 'countries'));
+        $countries = Countries::all();
+        return view('yesapproval.show', compact('patients', 'matchingRoles', 'ticketId', 'therapists', 'ticket', 'patient', 'mailTypes', 'attachments', 'countries'));
     }
 
     /**
@@ -251,7 +239,6 @@ class NoApprovalController extends Controller
             // $ticket->files = $data[''];
 
             // $ticket->save();
-
             $ticket->save();
             if ($data['comments'] != null) {
                 $history = new TicketHistory();
@@ -261,7 +248,6 @@ class NoApprovalController extends Controller
 
                 $history->save();
             }
-
 
             //attachment update
 
