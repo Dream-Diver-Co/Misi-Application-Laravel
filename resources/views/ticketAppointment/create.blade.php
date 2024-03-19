@@ -49,6 +49,17 @@
                         </div>
 
 
+                        <div class="form-group row" id="appointment-time-group2" style="display: none;">
+                            <label for="appointment-time2" class="col-5 text-right">Therapist avilable Time:</label>
+                            <div class="col-7">
+                                <input type="text" class="form-control form-control-sm" id="appointment-time2"
+                                    name="appointment-time2" data-enable-time data-no-calendar placeholder="Select Time" value="Hello" readonly>
+                            </div>
+                        </div>
+
+
+
+
                         <div class="form-group row" id="appointment-time-group" style="display: none;">
                             <label for="appointment-time" class="col-5 text-right">Appointment Time:</label>
                             <div class="col-7">
@@ -182,6 +193,11 @@
                             var weeklyHolidays = response
                                 .holidays; // Example: Sunday and Monday
 
+                            var start_time = response.start_time;
+                            var end_time = response.end_time;
+
+                            var work_time = start_time + ' - ' + end_time;
+
                             // Function to check if a date is in the leaves array
                             function isDateInLeaves(date) {
                                 var year = date.getFullYear();
@@ -219,6 +235,8 @@
                                         // Show the appointment time field
                                         $('#appointment-time-group').show();
 
+                                        $('#appointment-time-group2').show();
+
                                         // Enable timepicker for the selected date
                                         var appointmentTimeInput = document
                                             .getElementById('appointment-time');
@@ -228,6 +246,9 @@
                                             dateFormat: "H:i:s",
                                             time_24hr: false
                                         });
+
+                                        var appointmentTimeInput2 = document.getElementById('appointment-time2');
+                                        appointmentTimeInput2.value = work_time;
                                     } else {
                                         // Hide the appointment time field
                                         $('#appointment-time-group').hide();

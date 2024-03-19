@@ -359,6 +359,8 @@ class TicketAppointmentController extends Controller
         $leaves_data = LeaveSchedule::where('therapist_id', $therapistId)->get();
 
         $holidays = WorkDayTime::where('therapist_id', $therapistId)->first()->weekly_holidays;
+        $start_time = WorkDayTime::where('therapist_id', $therapistId)->first()->start_time;
+        $end_time = WorkDayTime::where('therapist_id', $therapistId)->first()->end_time;
 
         // Convert the dates from JSON string to an array
         $leaves = $leaves_data->map(function ($leave) {
@@ -368,7 +370,7 @@ class TicketAppointmentController extends Controller
 
         $dates = $leaves->pluck('dates')->flatten()->toArray();
 
-        return response()->json(['leave_dates' => $dates, 'holidays' => $holidays]);
+        return response()->json(['leave_dates' => $dates, 'holidays' => $holidays, 'start_time' => $start_time , 'end_time' => $end_time]);
     }
 
     public function getIntake($id)
