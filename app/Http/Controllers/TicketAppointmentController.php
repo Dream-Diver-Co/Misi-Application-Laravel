@@ -108,6 +108,11 @@ class TicketAppointmentController extends Controller
 
             $appointment->ticket_id = $data['select-ticket'];
             $appointment->fee = $data['appointment-fee'];
+
+            $appointment->time = $data['appointment-time'];
+            $appointment->date = $data['appointment-date'];
+
+
             $appointment->status = $data['select-status'];
             $appointment->type = $data['appointment-type'];
 

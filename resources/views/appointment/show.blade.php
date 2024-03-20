@@ -136,43 +136,57 @@
                         <div class="form-group row">
                             <label for="select-therapists" class="col-5 text-right">Assign Therapist:</label>
                             <div class="col-7">
-                                <select class="form-control form-control-sm selectpicker" id="assign-therapist"
-                                    name="assign-therapist">
-                                    @php
-                                        $suggested_array = json_decode($ticket->suggested_therapists) ?? [];
-                                        $selected = \App\Models\Ticket::where('id', $ticketId)->first()->assigned_therapist;
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <select class="form-control form-control-sm selectpicker" id="assign-therapist"
+                                            name="assign-therapist">
+                                            @php
+                                                $suggested_array = json_decode($ticket->suggested_therapists) ?? [];
+                                                $selected = \App\Models\Ticket::where('id', $ticketId)->first()->assigned_therapist;
 
-                                    @endphp
-                                    <option value="">Select Therapist</option>
-                                    @foreach ($suggested_array as $therapist)
-                                        @php
+                                            @endphp
 
-                                            $therapistId = $therapist;
+                                            <option value="">Select Therapist</option>
+                                            @foreach ($suggested_array as $therapist)
+                                                @php
 
-                                            $matchingRows = \App\Models\TicketAppointment::where('assigned_therapists', $therapistId)->pluck('id');
-                                            $startDate = \Carbon\Carbon::now();
-                                            $endDate = $startDate->copy()->addDays(14);
-                                            $totalIntake = \Illuminate\Support\Facades\DB::table('intakes')
-                                                ->whereIn('appointment_id', $matchingRows)
-                                                ->whereBetween('date', [$startDate->toDateString(), $endDate->toDateString()])
-                                                ->count();
+                                                    $therapistId = $therapist;
 
-                                            $therapist_work_time = \App\Models\WorkDayTime::where('therapist_id', $therapistId )->first();
+                                                    $matchingRows = \App\Models\TicketAppointment::where('assigned_therapists', $therapistId)->pluck('id');
+                                                    $startDate = \Carbon\Carbon::now();
+                                                    $endDate = $startDate->copy()->addDays(14);
+                                                    $totalIntake = \Illuminate\Support\Facades\DB::table('intakes')
+                                                        ->whereIn('appointment_id', $matchingRows)
+                                                        ->whereBetween('date', [$startDate->toDateString(), $endDate->toDateString()])
+                                                        ->count();
 
-                                        @endphp
+                                                    $therapist_work_time = \App\Models\WorkDayTime::where('therapist_id', $therapistId )->first();
 
-                                        <option value="{{ $therapist }}"
-                                            {{ $selected == $therapist ? 'selected' : '' }}>
-                                            {{ \App\Models\Therapist::where('id', $therapist)->first()->user()->first()->name? \App\Models\Therapist::where('id', $therapist)->first()->user()->first()->name: \App\Models\Therapist::where('id', $therapist)->first()->user()->first()->id }}
+                                                @endphp
 
-                                            ({{ $totalIntake }})
-                                            ({{$therapist_work_time->start_time ?? ''}} : {{$therapist_work_time->end_time ?? ''}})
+                                                <option value="{{ $therapist }}"
+                                                    {{ $selected == $therapist ? 'selected' : '' }}>
+                                                    {{ \App\Models\Therapist::where('id', $therapist)->first()->user()->first()->name? \App\Models\Therapist::where('id', $therapist)->first()->user()->first()->name: \App\Models\Therapist::where('id', $therapist)->first()->user()->first()->id }}
 
-                                        </option>
-                                    @endforeach
-                                </select>
+                                                    ({{ $totalIntake }})
+                                                    ({{$therapist_work_time->start_time ?? ''}} : {{$therapist_work_time->end_time ?? ''}})
+
+                                                </option>
+                                            @endforeach
+                                        </select>
+
+                                        <div class="input-group-append " id="view-patient" data-toggle="modal"
+                                                    data-target="#compareTherapist-view-modal">
+                                                    <div class="input-group-text bg-gradient-primary">
+                                                        <i class="fas fa-eye"></i>
+                                                    </div>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
+
                         <div class="form-group row">
                             <label for="mono-multi-zd" class="col-5 text-right">Mono/Multi ZD:</label>
                             <div class="col-7">
@@ -487,6 +501,7 @@
 
     </div>
     @include('extras.patient_modal')
+    @include('extras.therapistCompare_modal')
     @include('extras.cancelModal')
     @include('extras.mailModal')
     @include('extras.pib_modal')

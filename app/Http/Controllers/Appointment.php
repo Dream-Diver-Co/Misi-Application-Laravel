@@ -197,7 +197,24 @@ class Appointment extends Controller
         $attachments = $ticket->attachments;
         $countries = Countries::all();
 
-        return view('appointment.show', compact('patients', 'matchingRoles', 'ticketId', 'therapists', 'ticket', 'patient', 'mailTypes', 'attachments', 'countries'));
+        $suggested_array = json_decode($ticket->suggested_therapists);
+        //dd($suggested_array);
+
+        $assigned_therapist_one_id = $suggested_array[0];
+        $appointment_of_therapist_one = TicketAppointment::where('assigned_therapists',$assigned_therapist_one_id)->get();
+        //dd($appointment_of_therapist_one);
+
+        $assigned_therapist_two_id = $suggested_array[1];
+        $appointment_of_therapist_two = TicketAppointment::where('assigned_therapists',$assigned_therapist_two_id)->get();
+
+        $assigned_therapist_three_id = $suggested_array[2];
+        $appointment_of_therapist_three = TicketAppointment::where('assigned_therapists', $assigned_therapist_three_id )->get();
+        //dd($appointment_of_therapist_three);
+
+
+
+
+        return view('appointment.show', compact('patients', 'matchingRoles', 'ticketId', 'therapists', 'ticket', 'patient', 'mailTypes', 'attachments', 'countries','appointment_of_therapist_one','appointment_of_therapist_two','appointment_of_therapist_three'));
     }
 
     /**
