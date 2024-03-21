@@ -160,7 +160,7 @@
                                                         ->whereBetween('date', [$startDate->toDateString(), $endDate->toDateString()])
                                                         ->count();
 
-                                                    $therapist_work_time = \App\Models\WorkDayTime::where('therapist_id', $therapistId )->first();
+                                                    //$therapist_work_time = \App\Models\WorkDayTime::where('therapist_id', $therapistId )->first();
 
                                                 @endphp
 
@@ -169,7 +169,7 @@
                                                     {{ \App\Models\Therapist::where('id', $therapist)->first()->user()->first()->name? \App\Models\Therapist::where('id', $therapist)->first()->user()->first()->name: \App\Models\Therapist::where('id', $therapist)->first()->user()->first()->id }}
 
                                                     ({{ $totalIntake }})
-                                                    ({{$therapist_work_time->start_time ?? ''}} : {{$therapist_work_time->end_time ?? ''}})
+                                                    {{-- ({{$therapist_work_time->start_time ?? ''}} : {{$therapist_work_time->end_time ?? ''}}) --}}
 
                                                 </option>
                                             @endforeach
@@ -178,7 +178,7 @@
                                         <div class="input-group-append " id="view-patient" data-toggle="modal"
                                                     data-target="#compareTherapist-view-modal">
                                                     <div class="input-group-text bg-gradient-primary">
-                                                        <i class="fas fa-eye"></i>
+                                                        <i class="fas fa-balance-scale"></i>
                                                     </div>
                                         </div>
                                     </div>

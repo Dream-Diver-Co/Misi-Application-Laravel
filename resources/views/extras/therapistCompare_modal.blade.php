@@ -17,25 +17,67 @@
 
                     <div class="row justify-content-between">
 
+                        <div class="col-md-4 justify-content-end " style="border: 1px solid blue">
+                            <p>Name: {{ $user_with_therapist_one->name }}, Id: {{ $user_with_therapist_one->id }}</p>
 
-                        <div class="col-md-4 justify-content-end">
-                            <p>Therapist name 1</p>
+                            @foreach($appointment_of_therapist_one as $date => $appointmentsForDate)
+                                <strong>{{ $date }}</strong>
+                                <div>...............</div> <!-- Visual separator for the date -->
+                                @foreach($appointmentsForDate as $appointment)
+                                    <p>{{ $appointment->date }} : {{ $appointment->time }}</p> <!-- Assuming you want to display the date for each appointment -->
+                                @endforeach
+                                <br> <!-- Line break to separate each group of dates -->
+                            @endforeach
+                        </div>
+
+                        <div class="col-md-4 justify-content-end " style="border: 1px solid blue">
+                            <p>Name: {{ $user_with_therapist_one->name }}, Id: {{ $user_with_therapist_one->id }}</p>
+
+                            @foreach($appointment_of_therapist_two as $date => $appointmentsForDate)
+                                <strong>{{ $date }}</strong>
+                                <div>...............</div> <!-- Visual separator for the date -->
+                                @foreach($appointmentsForDate as $appointment)
+                                    <p>{{ $appointment->date }} : {{ $appointment->time }}</p> <!-- Assuming you want to display the date for each appointment -->
+                                @endforeach
+                                <br> <!-- Line break to separate each group of dates -->
+                            @endforeach
+                        </div>
+
+                        <div class="col-md-4 justify-content-end " style="border: 1px solid blue">
+                            <p>Name: {{ $user_with_therapist_one->name }}, Id: {{ $user_with_therapist_one->id }}</p>
+
+                            @foreach($appointment_of_therapist_three as $date => $appointmentsForDate)
+                                <strong>{{ $date }}</strong>
+                                <div>...............</div> <!-- Visual separator for the date -->
+                                @foreach($appointmentsForDate as $appointment)
+                                    <p>{{ $appointment->date }} : {{ $appointment->time }}</p> <!-- Assuming you want to display the date for each appointment -->
+                                @endforeach
+                                <br> <!-- Line break to separate each group of dates -->
+                            @endforeach
+                        </div>
+
+
+                        {{-- <div class="col-md-4 justify-content-end ">
+                            Name: {{ $user_with_therapist_one->name}} , Id: {{ $user_with_therapist_one->id}}
+
                             @foreach($appointment_of_therapist_one as $appointment)
                                 <p><span>{{$appointment->date}}</span> <span>{{$appointment->time}}</span></p>
                             @endforeach
-                        </div>
-                        <div class="col-md-4 justify-content-end">
-                            <p>Therapist name 2 </p>
+                        </div> --}}
+
+
+                        {{-- <div class="col-md-4 justify-content-end">
+                            Name: {{ $user_with_therapist_one->name}} , Id : {{ $user_with_therapist_one->id}}
                             @foreach($appointment_of_therapist_two as $appointment)
                                 <p><span>{{$appointment->date}}</span> <span>{{$appointment->time}}</span></p>
                             @endforeach
                         </div>
                         <div class="col-md-4 justify-content-end">
-                            <p>Therapist name 3 </p>
+                            Name: {{ $user_with_therapist_one->name}} , Id : {{ $user_with_therapist_one->id}}
                             @foreach($appointment_of_therapist_three as $appointment)
                                 <p><span>{{$appointment->date}}</span> <span>{{$appointment->time}}</span></p>
                             @endforeach
-                        </div>
+                        </div> --}}
 
 
 
