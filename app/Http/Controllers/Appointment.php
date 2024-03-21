@@ -6,6 +6,7 @@ use App\Models\EmailTemplate;
 use App\Models\Patient;
 use App\Models\Therapist;
 use App\Models\Ticket;
+use App\Models\User;
 use App\Models\TicketHistory;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,7 @@ use App\Models\Intake;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use PragmaRX\Countries\Package\Countries;
+//use Carbon\Carbon;
 
 class Appointment extends Controller
 {
@@ -170,12 +172,15 @@ class Appointment extends Controller
     {
         $roles = ['screener', 'pib', 'pit', 'heranmelding', 'yes approval', 'no approval', 'vtcb',  'appointment'];
         $therapists = Therapist::all();
+        //dd($therapists);
         $matchingRoles = Role::whereIn('name', $roles)->get();
         // $screener = Role::where('name', 'screener')->first();
         $patients = Patient::all();
         $ticketId = $id;
         $ticket = Ticket::where('id', $id)->first();
         $patient = $ticket->patient()->first();
+
+        // $therapist = $ticket->therapist()->first();
 
         // count appointment
 
@@ -197,7 +202,65 @@ class Appointment extends Controller
         $attachments = $ticket->attachments;
         $countries = Countries::all();
 
-        return view('appointment.show', compact('patients', 'matchingRoles', 'ticketId', 'therapists', 'ticket', 'patient', 'mailTypes', 'attachments', 'countries'));
+        $suggested_array = json_decode($ticket->suggested_therapists);
+        //dd($suggested_array);
+
+        $assigned_therapist_one_id = $suggested_array[0];
+        $therapist_one = Therapist::find($assigned_therapist_one_id);
+        $user_with_therapist_one = User::find($therapist_one->user_id);
+        //$appointment_of_therapist_one = TicketAppointment::where('assigned_therapists',$assigned_therapist_one_id)->get();
+
+        $startDate = Carbon::today();
+        $endDate = Carbon::today()->addDays(14);
+
+        $appointment_of_therapist_one = TicketAppointment::where('assigned_therapists', $assigned_therapist_one_id)
+                ->whereDate('date', '>=', $startDate) // Filter for appointments starting from today
+                ->whereDate('date', '<=', $endDate) // Filter for appointments up to the next 14 days
+                ->orderBy('date') // Ensure appointments are sorted by date
+                ->get()
+                ->groupBy(function($appointment) {
+                    // Note: Changed the variable to $appointment for clarity, as it represents the appointment model, not just a date.
+                    return \Carbon\Carbon::parse($appointment->date)->format('Y-m-d'); // Group by date only, ignoring time if present
+                });
+
+
+
+        $assigned_therapist_two_id = $suggested_array[1];
+        $therapist_two = Therapist::find($assigned_therapist_two_id);
+        $user_with_therapist_two = User::find($therapist_two->user_id);
+        //$appointment_of_therapist_two = TicketAppointment::where('assigned_therapists',$assigned_therapist_two_id)->get();
+
+        $appointment_of_therapist_two = TicketAppointment::where('assigned_therapists', $assigned_therapist_two_id)
+                ->whereDate('date', '>=', $startDate) // Filter for appointments starting from today
+                ->whereDate('date', '<=', $endDate) // Filter for appointments up to the next 14 days
+                ->orderBy('date') // Ensure appointments are sorted by date
+                ->get()
+                ->groupBy(function($appointment) {
+                    // Note: Changed the variable to $appointment for clarity, as it represents the appointment model, not just a date.
+                    return \Carbon\Carbon::parse($appointment->date)->format('Y-m-d'); // Group by date only, ignoring time if present
+                });
+
+
+
+        $assigned_therapist_three_id = $suggested_array[2];
+        $therapist_three = Therapist::find($assigned_therapist_three_id);
+        $user_with_therapist_three = User::find($therapist_three->user_id);
+        //$appointment_of_therapist_three = TicketAppointment::where('assigned_therapists', $assigned_therapist_three_id )->get();
+        $appointment_of_therapist_three = TicketAppointment::where('assigned_therapists', $assigned_therapist_three_id)
+                ->whereDate('date', '>=', $startDate) // Filter for appointments starting from today
+                ->whereDate('date', '<=', $endDate) // Filter for appointments up to the next 14 days
+                ->orderBy('date') // Ensure appointments are sorted by date
+                ->get()
+                ->groupBy(function($appointment) {
+                    // Note: Changed the variable to $appointment for clarity, as it represents the appointment model, not just a date.
+                    return \Carbon\Carbon::parse($appointment->date)->format('Y-m-d'); // Group by date only, ignoring time if present
+                });
+        //dd($appointment_of_therapist_three);
+
+
+
+
+        return view('appointment.show', compact('patients', 'matchingRoles', 'ticketId', 'therapists', 'ticket', 'patient', 'mailTypes', 'attachments', 'countries','appointment_of_therapist_one','appointment_of_therapist_two','appointment_of_therapist_three','user_with_therapist_one','user_with_therapist_two','user_with_therapist_three'));
     }
 
     /**

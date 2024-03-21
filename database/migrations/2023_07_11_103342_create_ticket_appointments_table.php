@@ -17,6 +17,8 @@ class CreateTicketAppointmentsTable extends Migration
             $table->id();
             $table->unsignedBigInteger('ticket_id');
             $table->string('fee');
+            $table->time('time');
+            $table->string('date');
             $table->string('status');
             $table->string('type');
             $table->string('assigned_therapists')->nullable();
