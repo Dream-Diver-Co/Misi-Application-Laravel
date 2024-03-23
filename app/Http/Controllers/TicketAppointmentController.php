@@ -375,7 +375,24 @@ class TicketAppointmentController extends Controller
 
         $dates = $leaves->pluck('dates')->flatten()->toArray();
 
-        return response()->json(['leave_dates' => $dates, 'holidays' => $holidays, 'start_time' => $start_time , 'end_time' => $end_time]);
+
+
+        $startDate = Carbon::today();
+        $endDate = Carbon::today()->addDays(14);
+
+        $appointment_of_therapist_one = TicketAppointment::where('assigned_therapists', $therapistId)
+                ->whereDate('date', '>=', $startDate) // Filter for appointments starting from today
+                ->whereDate('date', '<=', $endDate) // Filter for appointments up to the next 14 days
+                ->orderBy('date') // Ensure appointments are sorted by date
+                ->get()
+                ->groupBy(function($appointment) {
+                    // Note: Changed the variable to $appointment for clarity, as it represents the appointment model, not just a date.
+                    return \Carbon\Carbon::parse($appointment->date)->format('Y-m-d'); // Group by date only, ignoring time if present
+                });
+
+
+
+        return response()->json([ 'therapistId' =>$therapistId ,'leave_dates' => $dates, 'holidays' => $holidays, 'start_time' => $start_time , 'end_time' => $end_time, 'appointment_of_therapist_one' => $appointment_of_therapist_one]);
     }
 
     public function getIntake($id)
