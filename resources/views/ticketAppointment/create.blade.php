@@ -163,7 +163,7 @@
         </div>
     </div>
 
-    @include('extras.therapistCompare_modal2')
+    @include('extras.therapistCompare_modal_two')
 
 @stop
 
@@ -211,6 +211,46 @@
 
                             var appointment_of_therapist_one = response.appointment_of_therapist_one;
                             var therapistId = response.therapistId;
+
+
+                            //ajax for
+
+                            $('#compare').click(function() {
+                                // Run AJAX request using therapistId
+                                $.ajax({
+                                    url: '/compareAppointment/' + therapistId,
+                                    method: 'GET',
+                                    success: function(data) {
+                                        // Handle success response
+                                        console.log(data);
+
+                                        var modalBody = $('#compareTherapist-view-modal').find('.modal-body');
+                                        modalBody.empty(); // Clear existing content
+
+                                        // Display therapist's name
+                                        modalBody.append('<p>Therapist Name: ' + data.user_with_therapist + ', ID: ' + data.therapistId + '</p>');
+
+                                        // Loop through appointments and display them
+                                        $.each(data.appointment_of_therapist_one, function(date, appointments) {
+                                            modalBody.append('<strong>' + date + '</strong>');
+                                            $.each(appointments, function(index, appointment) {
+                                                modalBody.append('<p>' + appointment.date + ' : ' + appointment.time + '</p>');
+                                            });
+                                        });
+
+                                        // Show the modal
+                                        $('#compareTherapist-view-modal').modal('show');
+                                    },
+                                    error: function(xhr, status, error) {
+                                        // Handle error response
+                                        console.error('Error:', error);
+                                    }
+                                });
+                            });
+
+
+
+
 
                             // Function to check if a date is in the leaves array
                             function isDateInLeaves(date) {
