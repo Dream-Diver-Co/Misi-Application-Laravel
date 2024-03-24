@@ -396,7 +396,7 @@ class TicketAppointmentController extends Controller
     }
 
 
-    public function getCompareAppointment($id)
+    public function compareAppointment($id)
 {
     $therapistId = $id;
 

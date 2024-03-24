@@ -28,9 +28,17 @@
                     <i class="fas fa-laptop-medical"></i>
                 </button>
 
-                <button class="top-button go-to-appointment">
+                {{-- <button class="top-button go-to-appointment">
                     <a href="{{ route('ticket-appointments.create') }}" target="_blank"> Appointment</a>
+                </button> --}}
+
+                <button class="top-button go-to-appointment">
+                    <a href="{{ route('ticket-appointments.create', ['ticket_id' => $ticket->id]) }}" target="_blank">Appointment</a>
                 </button>
+
+
+
+
 
             </div>
         </div>
