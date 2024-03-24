@@ -53,7 +53,14 @@
                             <label for="appointment-time2" class="col-5 text-right">Therapist avilable Time:</label>
                             <div class="col-7">
                                 <input type="text" class="form-control form-control-sm" id="appointment-time2"
-                                    name="appointment-time2" data-enable-time data-no-calendar placeholder="Select Time" value="Hello" readonly>
+                                    name="appointment-time2" data-enable-time data-no-calendar placeholder="Select Time" value="" readonly>
+
+                                <div class="input-group-append " id="compare" data-toggle="modal"
+                                                data-target="#compareTherapist-view-modal">
+                                    <div class="input-group-text bg-gradient-primary">
+                                        <i class="fas fa-balance-scale"></i>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -156,6 +163,8 @@
         </div>
     </div>
 
+    @include('extras.therapistCompare_modal2')
+
 @stop
 
 @section('js')
@@ -187,6 +196,8 @@
                         success: function(response) {
                             // Handle the response data
                             console.log(response);
+                            console.log(response.appointment_of_therapist_one);
+                            console.log(response.holidays);
                             var leaves = response.leave_dates;
 
                             // Weekly holidays value from the database (0: Sunday, 1: Monday, etc.)
@@ -197,6 +208,9 @@
                             var end_time = response.end_time;
 
                             var work_time = start_time + ' - ' + end_time;
+
+                            var appointment_of_therapist_one = response.appointment_of_therapist_one;
+                            var therapistId = response.therapistId;
 
                             // Function to check if a date is in the leaves array
                             function isDateInLeaves(date) {
@@ -249,6 +263,10 @@
 
                                         var appointmentTimeInput2 = document.getElementById('appointment-time2');
                                         appointmentTimeInput2.value = work_time;
+
+
+
+
                                     } else {
                                         // Hide the appointment time field
                                         $('#appointment-time-group').hide();
