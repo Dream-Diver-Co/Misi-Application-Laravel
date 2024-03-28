@@ -81,7 +81,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/get-intake/{id}', 'App\Http\Controllers\TicketAppointmentController@getIntake');
     Route::get('/appointments-calendar', 'App\Http\Controllers\TicketAppointmentController@toCalendar');
     Route::get('/calendar-events', 'App\Http\Controllers\TicketAppointmentController@getEvents');
+
     Route::get('/datesandappoints/{id}', 'App\Http\Controllers\TicketAppointmentController@getDatesAndAppoints');
+    Route::get('/compareAppointment/{id}', 'App\Http\Controllers\TicketAppointmentController@compareAppointment');
+
     Route::get('/missing-info-tickets', 'App\Http\Controllers\TicketController@missingInfo');
     Route::get('/update-assigned-to', 'App\Http\Controllers\TicketController@updateAssignedTo');
     Route::get('/get-role-users', 'App\Http\Controllers\TicketController@getUsersByRole');

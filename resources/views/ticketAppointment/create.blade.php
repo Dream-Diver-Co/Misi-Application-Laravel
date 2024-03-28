@@ -24,6 +24,11 @@
                 <div class="row justify-content-between">
                     <div class="col-md-6 justify-content-end">
 
+                        <div class="form-group row" style="display: none">
+                            <p class=" col-5 text-right"></p>
+                            <p class="ticket-id-selected col-7 " style="color: blue" ></p>
+                        </div>
+
                         <div class="form-group row">
                             <label for="select-ticket" class="col-5 text-right">Slected Ticket:</label>
                             <div class="col-7">
@@ -52,13 +57,17 @@
                         <div class="form-group row" id="appointment-time-group2" style="display: none;">
                             <label for="appointment-time2" class="col-5 text-right">Therapist avilable Time:</label>
                             <div class="col-7">
-                                <input type="text" class="form-control form-control-sm" id="appointment-time2"
-                                    name="appointment-time2" data-enable-time data-no-calendar placeholder="Select Time" value="" readonly>
+                                <div class="form-group">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control form-control-sm" id="appointment-time2"
+                                            name="appointment-time2" data-enable-time data-no-calendar placeholder="Select Time" value="" readonly>
 
-                                <div class="input-group-append " id="compare" data-toggle="modal"
-                                                data-target="#compareTherapist-view-modal">
-                                    <div class="input-group-text bg-gradient-primary">
-                                        <i class="fas fa-balance-scale"></i>
+                                        <div class="input-group-append " id="compare" data-toggle="modal"
+                                                        data-target="#compareTherapist-view-modal">
+                                            <div class="input-group-text bg-gradient-primary">
+                                                <i class="fas fa-balance-scale"></i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -163,13 +172,51 @@
         </div>
     </div>
 
-    @include('extras.therapistCompare_modal2')
+    @include('extras.therapistCompare_modal_two')
 
 @stop
 
 @section('js')
+
+<script>
+    // Function to remove the query parameter from the URL
+    function removeTicketIdFromURL() {
+        history.replaceState({}, document.title, window.location.pathname);
+    }
+
+    // Get the ticket ID from the URL query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const ticketId = urlParams.get('ticket_id');
+
+    // Update the content of the <p> tag with the ticket ID
+    document.addEventListener('DOMContentLoaded', function() {
+        const ticketIdElement = document.querySelector('.ticket-id-selected');
+        if (ticketIdElement && ticketId) {
+            ticketIdElement.textContent = "Your selected ticket id is: " + ticketId;
+            removeTicketIdFromURL();
+        } else if (ticketIdElement) {
+            ticketIdElement.style.display = "none"; // Hide the <p> tag if no ticket ID is found
+        }
+
+        // Show the parent <div> if it's hidden by default
+        const formGroupDiv = document.querySelector('.form-group.row');
+        if (formGroupDiv) {
+            formGroupDiv.style.display = "block";
+        }
+    });
+</script>
+
+
+
+
+
+
     <script>
+
+
         $(document).ready(function() {
+
+
             // Hide the appointment date field initially
             $('#appointment-date-group').hide();
 
@@ -196,8 +243,7 @@
                         success: function(response) {
                             // Handle the response data
                             console.log(response);
-                            console.log(response.appointment_of_therapist_one);
-                            console.log(response.holidays);
+
                             var leaves = response.leave_dates;
 
                             // Weekly holidays value from the database (0: Sunday, 1: Monday, etc.)
@@ -211,6 +257,46 @@
 
                             var appointment_of_therapist_one = response.appointment_of_therapist_one;
                             var therapistId = response.therapistId;
+
+
+                            //ajax for
+
+                            $('#compare').click(function() {
+                                // Run AJAX request using therapistId
+                                $.ajax({
+                                    url: '/compareAppointment/' + therapistId,
+                                    method: 'GET',
+                                    success: function(data) {
+                                        // Handle success response
+                                        console.log(data);
+
+                                        var modalBody = $('#compareTherapist-view-modal').find('.modal-body');
+                                        modalBody.empty(); // Clear existing content
+
+                                        // Display therapist's name
+                                        modalBody.append('<p>Therapist Name: ' + data.user_with_therapist + ', ID: ' + data.therapistId + '</p>');
+
+                                        // Loop through appointments and display them
+                                        $.each(data.appointment_of_therapist_one, function(date, appointments) {
+                                            modalBody.append('<strong>' + date + '</strong>');
+                                            $.each(appointments, function(index, appointment) {
+                                                modalBody.append('<p>' + appointment.date + ' : ' + appointment.time + '</p>');
+                                            });
+                                        });
+
+                                        // Show the modal
+                                        $('#compareTherapist-view-modal').modal('show');
+                                    },
+                                    error: function(xhr, status, error) {
+                                        // Handle error response
+                                        console.error('Error:', error);
+                                    }
+                                });
+                            });
+
+
+
+
 
                             // Function to check if a date is in the leaves array
                             function isDateInLeaves(date) {

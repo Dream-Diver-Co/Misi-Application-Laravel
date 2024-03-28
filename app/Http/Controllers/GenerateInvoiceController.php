@@ -21,13 +21,18 @@ class GenerateInvoiceController extends Controller
 
 
         $intake = Intake::where('id', $id)->first();
-        $appointment = TicketAppointment::where('id', $id)->first();
+        // dd($intake);
+        $appointment = TicketAppointment::where('id', $intake->appointment_id)->first();
+        //dd($appointment);
         $ticket = Ticket::where('id', $appointment->ticket_id)->first();
+        //dd($ticket);
         $patient = Patient::where('id', $ticket->patient_id)->first();
+        //dd($patient);
         $user = User::where('id', $patient->user_id)->first();
+        //dd($user);
 
         $pdf = PDF::loadView('invoice', compact('intake', 'appointment', 'patient', 'user'));
-        //dd($intake);
+        //dd($pdf);
 
         return $pdf->stream();
     }

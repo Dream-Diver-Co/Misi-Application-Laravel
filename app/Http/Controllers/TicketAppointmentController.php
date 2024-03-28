@@ -7,6 +7,7 @@ use App\Models\LeaveSchedule;
 use App\Models\Therapist;
 use App\Models\Ticket;
 use App\Models\TicketAppointment;
+use App\Models\User;
 use App\Models\WorkDayTime;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -285,7 +286,7 @@ class TicketAppointmentController extends Controller
             $appointment->therapist_comment = $data['therapist-comment'];
             $appointment->remarks = $data['remarks'];
 
-            //$appointment->save();
+            $appointment->save();
 
             if ($data['select-status'] == 'cancelled') {
 
@@ -376,7 +377,6 @@ class TicketAppointmentController extends Controller
         $dates = $leaves->pluck('dates')->flatten()->toArray();
 
 
-
         $startDate = Carbon::today();
         $endDate = Carbon::today()->addDays(14);
 
@@ -394,6 +394,41 @@ class TicketAppointmentController extends Controller
 
         return response()->json([ 'therapistId' =>$therapistId ,'leave_dates' => $dates, 'holidays' => $holidays, 'start_time' => $start_time , 'end_time' => $end_time, 'appointment_of_therapist_one' => $appointment_of_therapist_one]);
     }
+
+
+    public function compareAppointment($id)
+{
+    $therapistId = $id;
+
+    $therapist = Therapist::find($therapistId);
+    $user_with_therapist = User::find($therapist->user_id);
+    $user_name = $user_with_therapist->name;
+
+    $startDate = Carbon::today();
+    $endDate = Carbon::today()->addDays(14);
+
+    $appointments = TicketAppointment::where('assigned_therapists', $therapistId)
+        ->whereDate('date', '>=', $startDate) // Filter for appointments starting from today
+        ->whereDate('date', '<=', $endDate) // Filter for appointments up to the next 14 days
+        ->orderBy('date') // Ensure appointments are sorted by date
+        ->get();
+
+    // Convert collection of appointments into an array
+    $appointment_of_therapist_one = $appointments->groupBy(function($appointment) {
+        return \Carbon\Carbon::parse($appointment->date)->format('Y-m-d'); // Group by date only, ignoring time if present
+    })->toArray();
+
+    return response()->json([
+        'appointment_of_therapist_one' => $appointment_of_therapist_one,
+        'user_with_therapist' => $user_name, // Pass therapist's name in the response
+        'therapistId' => $therapistId
+    ]);
+}
+
+
+
+
+
 
     public function getIntake($id)
     {
