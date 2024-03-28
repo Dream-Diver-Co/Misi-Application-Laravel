@@ -286,7 +286,7 @@ class TicketAppointmentController extends Controller
             $appointment->therapist_comment = $data['therapist-comment'];
             $appointment->remarks = $data['remarks'];
 
-            //$appointment->save();
+            $appointment->save();
 
             if ($data['select-status'] == 'cancelled') {
 

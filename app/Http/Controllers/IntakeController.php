@@ -158,7 +158,7 @@ class IntakeController extends Controller
             $intake->payment_status = $data['payment_status'];
             $intake->payment_method = $data['payment_method'];
 
-            //$intake->save();
+            $intake->save();
 
             // mail send
 
